@@ -1,0 +1,326 @@
+/* 
+   Tema para Foro de Videojuegos
+   - Modo oscuro con acento cyan neón
+   - Compatible con Bootstrap 5 + Jinja2 (Flask)
+   - Responsive y moderno
+*/
+
+:root {
+  --bg-body: #0d0d1a;
+  --bg-card: #151525;
+  --bg-input: #1e1e2e;
+  --border-color: #2a2a3a;
+  --text-primary: #f0f0ff;
+  --text-secondary: #a0a0c0;
+  --text-muted: #6a6a8a;
+  --accent: #00eeff; /* Cyan neón */
+  --accent-hover: #00ccee;
+  --success: #4ade80;
+  --danger: #ff6b6b;
+  --warning: #facc15;
+  --font-primary: 'Inter', sans-serif;
+}
+
+/* ============= RESET Y BODY ============= */
+body {
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  padding-bottom: 2rem;
+}
+
+/* ============= CONTENEDOR PERSONALIZADO ============= */
+.container-custom {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============= NAVBAR ============= */
+.navbar {
+  background-color: #0a0a16 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--border-color);
+}
+.navbar-brand {
+  font-weight: 700;
+  color: var(--accent) !important;
+  font-size: 1.4rem;
+}
+.navbar-brand:hover {
+  color: var(--accent-hover) !important;
+}
+.nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* ============= BREADCRUMB ============= */
+.breadcrumb {
+  background-color: rgba(20, 20, 35, 0.5) !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.5rem !important;
+  border: 1px solid var(--border-color);
+}
+.breadcrumb-item a {
+  color: var(--accent) !important;
+  text-decoration: none;
+}
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+.breadcrumb-item.active {
+  color: var(--text-muted) !important;
+}
+
+/* ============= TARJETAS (CARDS) ============= */
+.card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1.5rem;
+}
+.card-header {
+  background-color: rgba(20, 20, 35, 0.7) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 1rem 1.25rem !important;
+  font-weight: 600;
+  color: var(--accent);
+}
+.card-body {
+  padding: 1.25rem !important;
+}
+.card.text-center {
+  border: 1px dashed var(--border-color) !important;
+}
+
+/* ============= TARJETAS CLICKEABLES (PÁGINA PRINCIPAL) ============= */
+a.card {
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+a.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+  border-color: var(--accent) !important;
+}
+a.card:hover .card-title {
+  color: var(--accent) !important;
+}
+
+/* ============= FORMULARIOS ============= */
+.form-label {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.form-control {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  padding: 0.6rem 0.8rem !important;
+}
+.form-control:focus {
+  background-color: var(--bg-input) !important;
+  border-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 238, 255, 0.2) !important;
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ============= BOTONES ============= */
+.btn {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1.2rem !important;
+  border: none !important;
+}
+.btn-primary {
+  background-color: var(--accent) !important;
+  color: #000 !important;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover) !important;
+}
+.btn-success {
+  background-color: var(--success) !important;
+  color: #000 !important;
+}
+.btn-success:hover {
+  background-color: #38c172 !important;
+}
+.btn-outline-primary {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+.btn-outline-primary:hover {
+  background-color: rgba(0, 238, 255, 0.1) !important;
+  color: var(--accent) !important;
+}
+.btn-secondary {
+  background-color: #6c757d !important;
+  color: white !important;
+}
+
+/* ============= LISTA DE TEMAS (EN SECCIÓN) ============= */
+a.list-group-item-action {
+  display: block;
+  padding: 1rem 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+a.list-group-item-action:hover {
+  background-color: rgba(0, 238, 255, 0.08);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.topic-title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+a.list-group-item-action:hover .topic-title {
+  color: var(--accent);
+}
+.topic-meta {
+  color: var(--text-muted) !important;
+  font-size: 0.85rem;
+}
+a.list-group-item-action .badge {
+  background-color: var(--accent) !important;
+  color: #000 !important;
+  font-weight: 700;
+  min-width: 2.2rem;
+  text-align: center;
+}
+
+/* ============= POSTS EN HILO ============= */
+.post-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--accent);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.post-content {
+  flex: 1;
+}
+.post-content p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.post-footer {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ============= PERFIL DE USUARIO ============= */
+.profile-section h1 {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.profile-section hr {
+  border-color: var(--border-color);
+  margin: 1.5rem 0;
+}
+.list-group-item-action:hover {
+  background-color: rgba(0, 238, 255, 0.08) !important;
+}
+
+/* ============= ALERTAS ============= */
+.alert {
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+.alert-success {
+  background-color: rgba(74, 222, 128, 0.15) !important;
+  color: #d0f0d0 !important;
+}
+.alert-danger {
+  background-color: rgba(255, 107, 107, 0.15) !important;
+  color: #ffd0d0 !important;
+}
+
+/* ============= ENLACES ============= */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ============= TÍTULOS ============= */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============= SEPARADORES ============= */
+hr {
+  border-color: var(--border-color) !important;
+  opacity: 1 !important;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+  .card-header, .card-body {
+    padding: 1rem !important;
+  }
+  .post-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .post-avatar {
+    align-self: flex-start;
+  }
+  .btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.95rem;
+  }
+}

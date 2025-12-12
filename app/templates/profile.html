@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Perfil de {{ current_user.username }}{% endblock %}
+{% block content %}
+    <div class="profile-section">
+        <h1 class="mb-4">Mi Perfil</h1>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <p><strong>Usuario:</strong> {{ current_user.username }}</p>
+                <p><strong>Email:</strong> {{ current_user.email }}</p>
+            </div>
+        </div>
+        
+        <hr>
+
+        <h3 class="mb-3">Mis Suscripciones</h3>
+        {% if subscribed_topics %}
+            <div class="list-group">
+                {% for topic in subscribed_topics %}
+                    <a href="{{ url_for('main.topic', topic_id=topic.id) }}" class="list-group-item list-group-item-action">
+                        <h5 class="topic-title">{{ topic.title }}</h5>
+                        <small class="topic-meta">En la sección {{ topic.section.title }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No estás suscrito a ningún tema todavía.</p>
+        {% endif %}
+    </div>
+{% endblock %}

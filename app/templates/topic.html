@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('main.section', section_id=topic.section.id) }}">{{ topic.section.title }}</a></li>
+            <li class="breadcrumb-item active">{{ topic.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ topic.title }}</h1>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('main.subscribe', topic_id=topic.id) }}" method="post" class="d-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn btn-sm {% if is_subscribed %}btn-secondary{% else %}btn-outline-primary{% endif %}">
+                    {% if is_subscribed %}Desuscribirse{% else %}Suscribirse{% endif %}
+                </button>
+            </form>
+        {% endif %}
+    </div>
+
+    <!-- Post Original (OP) -->
+    <div class="card mb-4">
+        <div class="post-container">
+            <div class="post-avatar">{{ topic.author.username[0]|upper }}</div>
+            <div class="post-content">
+                <p>{{ topic.content }}</p>
+                <div class="post-footer">
+                    <strong>{{ topic.author.username }}</strong> • {{ topic.date_created.strftime('%d-%m-%Y %H:%M') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-3">Respuestas ({{ topic.posts|length }})</h3>
+
+    {% for post in topic.posts %}
+        <div class="card mb-3">
+            <div class="post-container">
+                <div class="post-avatar">{{ post.author.username[0]|upper }}</div>
+                <div class="post-content">
+                    <p>{{ post.content }}</p>
+                    <div class="post-footer">
+                        <strong>{{ post.author.username }}</strong> • {{ post.date_created.strftime('%d-%m-%Y %H:%M') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if current_user.is_authenticated %}
+        <hr>
+        <h3 class="mb-3">Añadir Respuesta</h3>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.content(class="form-control", rows="4", placeholder="Escribe tu respuesta aquí...") }}
+            </div>
+            <div class="d-grid">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    {% else %}
+        <p><a href="{{ url_for('main.login') }}">Inicia sesión</a> para poder responder.</p>
+    {% endif %}
+{% endblock %}
